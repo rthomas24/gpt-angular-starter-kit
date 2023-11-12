@@ -1,17 +1,40 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" scroll-y="false">
+  <div class="header">
+    <p class="title">AI Assistant</p>
+  </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="aiChatContainer">
+    <div #scrollableDiv class="messageContainer">
+        <ng-container>
+            <div class="messageBubble" *ngFor="let message of messageHistory">
+                <p class="messageText">{{ message }}</p>
+                <ion-spinner class="spinner" *ngIf="isLoadingAIMessage && message === '' " name="crescent"></ion-spinner>
+    
+            </div>
+        </ng-container>
+    </div>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+    <div class="textAreaContainer">
+        <div class="quickSelections">
+            <ion-icon id="quickSelect" name="add-circle-outline"></ion-icon>
+            <ion-popover trigger="quickSelect" side="top" alignment="center">
+                <ng-template>
+                  <ion-content class="ion-padding">
+                    <ion-list>
+                      <ion-item (click)="selector(question)" style="margin-bottom: 2rem; font-size: 14px;" *ngFor="let question of quickSelect">
+                        {{ question }}
+                      </ion-item>
+                    </ion-list>
+                  </ion-content>
+                </ng-template>
+              </ion-popover>
+        </div>
+
+        <span style="width: 100%;">
+            <input placeholder="Ask Question..." class="textarea" id="float-input" rows="5" cols="30" [(ngModel)]="userMessage"/>
+        </span>
+        <img style="width: 2rem;" src="assets/send.svg"/>
+
+    </div>
+  </div>
 </ion-content>

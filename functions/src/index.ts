@@ -1,19 +1,23 @@
-/**
- * Import function triggers from their respective submodules:
- *
- * import {onCall} from "firebase-functions/v2/https";
- * import {onDocumentWritten} from "firebase-functions/v2/firestore";
- *
- * See a full list of supported triggers at https://firebase.google.com/docs/functions
- */
+import * as cors from 'cors';
+import { onRequest } from "firebase-functions/v2/https";
+import * as admin from 'firebase-admin';
 
-import {onRequest} from "firebase-functions/v2/https";
-import * as logger from "firebase-functions/logger";
 
-// Start writing functions
-// https://firebase.google.com/docs/functions/typescript
+const corsHandler = cors({ origin: true });
+const openAIApiKey = process.env.OPENAI_KEY;
 
-// export const helloWorld = onRequest((request, response) => {
-//   logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+admin.initializeApp();
+
+export const getGPTResponse = onRequest(async (request, response) => {
+    corsHandler(request, response, async () => {
+       
+        try {
+
+            response.send({ answer: '' });
+
+        } catch (error) {
+
+            response.status(500).send('Internal Server Error');
+        }
+    });
+});
