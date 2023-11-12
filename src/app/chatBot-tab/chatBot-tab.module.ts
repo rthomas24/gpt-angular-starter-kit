@@ -2,17 +2,17 @@ import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Tab3Page } from './tab3.page';
+import { ChatBotTab } from './chatBot-tab.page';
 
-import { Tab3PageRoutingModule } from './tab3-routing.module';
+import { ChatBotTabRoutingModule } from './chatBot-tab-routing.module';
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    Tab3PageRoutingModule
+    ChatBotTabRoutingModule
   ],
-  declarations: [Tab3Page]
+  declarations: [ChatBotTab]
 })
-export class Tab3PageModule {}
+export class ChatBotTabModule {}

@@ -4,13 +4,14 @@
   </div>
 
   <div class="aiChatContainer">
-    <div #scrollableDiv class="messageContainer">
-        <ng-container>
-            <div class="messageBubble" *ngFor="let message of messageHistory">
-                <p class="messageText">{{ message }}</p>
-                <ion-spinner class="spinner" *ngIf="isLoadingAIMessage && message === '' " name="crescent"></ion-spinner>
-    
-            </div>
+    <div class="messageContainer">
+      <ng-container *ngIf="GPTMessages$ | async as vectorMessages">
+        <div class="messageBubble" *ngFor="let message of vectorMessages">
+            <p class="messageText">{{ message }}</p>
+        </div>
+        <div *ngIf="isLoadingAIMessage"  class="messageBubble">
+            <ion-spinner class="spinner" *ngIf="isLoadingAIMessage" name="crescent"></ion-spinner>
+        </div>
         </ng-container>
     </div>
 
@@ -33,7 +34,7 @@
         <span style="width: 100%;">
             <input placeholder="Ask Question..." class="textarea" id="float-input" rows="5" cols="30" [(ngModel)]="userMessage"/>
         </span>
-        <img style="width: 2rem;" src="assets/send.svg"/>
+        <img (click)="HNSWLibVector()" style="width: 2rem;" src="assets/send.svg"/>
 
     </div>
   </div>

@@ -53,13 +53,13 @@
             }
 
             &:nth-child(odd) {
-                align-self: flex-start;
-                background-color: #e6e6e6; // Some color for odd messages
+                align-self: flex-end;
+                background-color: #d0eafc; // Some color for even messages
             }
               
             &:nth-child(even) {
-                align-self: flex-end;
-                background-color: #d0eafc; // Some color for even messages
+                align-self: flex-start;
+                background-color: #e6e6e6; // Some color for odd messages
             }
         }
     }
