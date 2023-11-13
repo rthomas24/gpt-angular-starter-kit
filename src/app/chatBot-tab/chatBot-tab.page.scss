@@ -48,19 +48,24 @@
             border-radius: 5px;
             min-width: 50%;
 
+            ion-spinner.spinner{
+                height: 4rem;
+                width: 100%;
+            } 
+            
             .messageText{
                 margin: 0;
             }
+        }
 
-            &:nth-child(odd) {
-                align-self: flex-end;
-                background-color: #d0eafc; // Some color for even messages
-            }
-              
-            &:nth-child(even) {
-                align-self: flex-start;
-                background-color: #e6e6e6; // Some color for odd messages
-            }
+        .humanMessage {
+            align-self: flex-end;
+            background-color: #d0eafc; 
+        }
+        
+        .aiMessage {
+            align-self: flex-start;
+            background-color: #e6e6e6;
         }
     }
 
@@ -80,6 +85,7 @@
             font-size: 35px;
         }
 
+       
         .textarea{
             width: 95%;
             height: 3.5rem;
@@ -92,16 +98,13 @@
         }
 
         .sendButton{
-            height: 3.5rem;
-            width: 4rem;
-            background-color: cornflowerblue;
-            border-radius: .5rem;
+            width: 2rem;
         }
     }
 }
 
-ion-spinner.spinner{
-    height: 4rem;
-    width: 100%;
-}
 
+.quickSelectItem{
+    margin-bottom: 2rem; 
+    font-size: 14px;
+}

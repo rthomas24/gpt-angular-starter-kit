@@ -14,9 +14,9 @@ export class ChatBotTab {
   public chatHistory: ChatHistory[] = []
   public userMessage = ''
   public isLoadingAIMessage = false
-  public fileName: string = 'structuredDR.txt'
+  public fileName: string = 'default-file.txt'
   
-  public GPTMessages$: Observable<string[]>
+  public GPTMessages$: Observable<ChatHistory[]>
 
   public quickSelect = [
       "This is sample Question 1?",
@@ -33,27 +33,21 @@ export class ChatBotTab {
       this.GPTMessages$ = this.store.select(getGPTMessages)
       
       this.GPTMessages$.pipe(
-        filter((response) => !!this.userMessage && response.length % 2 === 0),
-        map((response) => {
-          this.addChatHistory(response[response.length - 1])
+        filter((response) => !!this.userMessage && !!response[response.length -1].ai),
+        tap(() => {
           this.isLoadingAIMessage = false
           this.userMessage = ''
         })).subscribe()
   }
 
 
-  public HNSWLibVector(){
+  public sendGPTMessage(){
     if(this.userMessage === '') {
       return
     }
     this.store.dispatch(addUserMessage({message: this.userMessage}))
-    this.store.dispatch(sendNewGPTMessage({message: this.userMessage, fileName: 'default-file.txt', chatHistory: this.chatHistory}))
+    this.store.dispatch(sendNewGPTMessage({message: this.userMessage, fileName: this.fileName, chatHistory: this.chatHistory}))
     this.isLoadingAIMessage = true
-  }
-
-  public addChatHistory(aiResponse: string) {
-    const chatHistory: ChatHistory = {ai: aiResponse, human: this.userMessage}
-    this.chatHistory = [...this.chatHistory, chatHistory];
   }
 
    public selector(message:string) {

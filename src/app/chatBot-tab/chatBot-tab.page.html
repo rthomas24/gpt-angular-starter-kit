@@ -6,14 +6,20 @@
   <div class="aiChatContainer">
     <div class="messageContainer">
       <ng-container *ngIf="GPTMessages$ | async as vectorMessages">
-        <div class="messageBubble" *ngFor="let message of vectorMessages">
-            <p class="messageText">{{ message }}</p>
-        </div>
-        <div *ngIf="isLoadingAIMessage"  class="messageBubble">
-            <ion-spinner class="spinner" *ngIf="isLoadingAIMessage" name="crescent"></ion-spinner>
-        </div>
+        <ng-container *ngFor="let message of vectorMessages">
+          <div *ngIf="message.human" class="messageBubble humanMessage">
+            <p class="messageText">{{ message.human }}</p>
+          </div>
+          <div *ngIf="message.ai" class="messageBubble aiMessage">
+            <p class="messageText">{{ message.ai }}</p>
+          </div>
+          <div *ngIf="!message.ai && isLoadingAIMessage" class="messageBubble aiMessage">
+            <ion-spinner class="spinner" name="crescent"></ion-spinner>
+          </div>
         </ng-container>
+      </ng-container>
     </div>
+    
 
     <div class="textAreaContainer">
         <div class="quickSelections">
@@ -22,7 +28,7 @@
                 <ng-template>
                   <ion-content class="ion-padding">
                     <ion-list>
-                      <ion-item (click)="selector(question)" style="margin-bottom: 2rem; font-size: 14px;" *ngFor="let question of quickSelect">
+                      <ion-item class="quickSelectItem" (click)="selector(question)" *ngFor="let question of quickSelect">
                         {{ question }}
                       </ion-item>
                     </ion-list>
@@ -34,7 +40,7 @@
         <span style="width: 100%;">
             <input placeholder="Ask Question..." class="textarea" id="float-input" rows="5" cols="30" [(ngModel)]="userMessage"/>
         </span>
-        <img (click)="HNSWLibVector()" style="width: 2rem;" src="assets/send.svg"/>
+        <img (click)="sendGPTMessage()" class="sendButton" src="assets/send.svg"/>
 
     </div>
   </div>

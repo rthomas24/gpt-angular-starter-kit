@@ -10,7 +10,7 @@ export class ChatBotService {
 
   constructor(private http: HttpClient) { }
 
-  public HNSWLibVectorCall(prompt: string, filename: string, chatHistory: ChatHistory[]): Observable<string>{
+  public sendGPTMessage(prompt: string, filename: string, chatHistory: ChatHistory[]): Observable<string>{
     const model = 'gpt-4'
     const url = 'YOUR_CLOUD_FUNCTUON_API_URL_HERE'
     return this.http.post(url, {prompt, filename, model, chatHistory}, /*{ headers, responseType: 'text' }*/)

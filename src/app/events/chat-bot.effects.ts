@@ -12,11 +12,10 @@ export class ChatBotEffects {
         private chatBotService: ChatBotService
       ) {}
 
-
       sendNewMessage$ = createEffect(() => this.actions$.pipe(
         ofType(sendNewGPTMessage),
-        switchMap(({message, fileName, chatHistory}) => this.chatBotService.HNSWLibVectorCall(message, fileName, chatHistory).pipe(
-          map(message => sendNewGPTMessageSuccess({newMessage: message})),
+        switchMap(({message, fileName, chatHistory}) => this.chatBotService.sendGPTMessage(message, fileName, chatHistory).pipe(
+          map(aiMessage => sendNewGPTMessageSuccess({newMessage: message, aiMessage})),
           catchError(error => of(sendNewGPTMessageError({error})))
         ))
       ));

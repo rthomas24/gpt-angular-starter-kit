@@ -13,9 +13,9 @@ export const sendNewGPTMessage = createAction(
 
 export const sendNewGPTMessageSuccess = createAction(
   '[ChatBot] Send New Message to thread  Success',
-  props<{ newMessage: any }>()
+  props<{ newMessage: string, aiMessage: string }>()
   );
-  
+
 export const sendNewGPTMessageError = createAction(
   '[ChatBot] Send New Message to thread Error',
   props<{ error: Error }>()
