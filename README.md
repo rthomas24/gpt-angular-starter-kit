@@ -1,3 +1,4 @@
+(I will add sample env files in order to get the keys set up soon)
 
 ## Introduction
 This starter kit is perfect for developers looking to create applications that leverage the power of GPT for document-based question-answering interfaces, with a robust and modern frontend developed in Angular. This ia an innovative project integrating Angular, Ionic, and Capacitor with Google Cloud and Firebase. This starter kit enables you to create a chatbot interface powered by Chat GPT and the LangChain framework, leveraging a large language model (LLM) for responding to user queries. It also incorporates HNSWLib, an open-source vector storage solution, to enhance its capabilities.
